@@ -84,6 +84,7 @@ def get_application(app_type: ApplicationType) -> dict[str, ApplicationType]:
 #     return {"app_type": app_type}
 
 
+#  QUERY parameters
 @app.get(path="/songs")
 def get_songs(skip: int, limit: int, page: int, per_page: int) -> dict[str, int]:
     return {"skip": skip, "limit": limit, "page": page, "per_page": per_page}
