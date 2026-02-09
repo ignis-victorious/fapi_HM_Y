@@ -85,17 +85,6 @@ wheels = [
 ]
 
 [[package]]
-name = "fapi-hm-y"
-version = "0.1.0"
-source = { virtual = "." }
-dependencies = [
-    { name = "fastapi", extra = ["standard"] },
-]
-
-[package.metadata]
-requires-dist = [{ name = "fastapi", extras = ["standard"], specifier = ">=0.128.5" }]
-
-[[package]]
 name = "fastapi"
 version = "0.128.5"
 source = { registry = "https://pypi.org/simple" }
@@ -161,6 +150,17 @@ sdist = { url = "https://files.pythonhosted.org/packages/11/15/6c3d85d63964340fd
 wheels = [
     { url = "https://files.pythonhosted.org/packages/1a/07/60f79270a3320780be7e2ae8a1740cb98a692920b569ba420b97bcc6e175/fastapi_cloud_cli-0.11.0-py3-none-any.whl", hash = "sha256:76857b0f09d918acfcb50ade34682ba3b2079ca0c43fda10215de301f185a7f8", size = 26884, upload-time = "2026-01-15T09:51:34.471Z" },
 ]
+
+[[package]]
+name = "fastapi-tutorial"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "fastapi", extra = ["standard"] },
+]
+
+[package.metadata]
+requires-dist = [{ name = "fastapi", extras = ["standard"], specifier = ">=0.128.5" }]
 
 [[package]]
 name = "fastar"
