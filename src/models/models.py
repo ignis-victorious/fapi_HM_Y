@@ -1,7 +1,5 @@
 #
 #  Import LIBRARIES
-from datetime import date
-from enum import Enum
 
 from pydantic import BaseModel
 
@@ -10,22 +8,10 @@ from pydantic import BaseModel
 #
 
 
-class SongModel(BaseModel):
+class TrackModel(BaseModel):
+    id: int
     title: str
-    desc: str
-    releasedDate: date
-    album: str | None = None  # Optional property
 
 
-class ApplicationType(str, Enum):
-    LOAN = "loan"
-    BUSINESS_FINANCING = "business_financing"
-    CAR_FINANCING = "car_financing"
-    HOME_FINANCING = "home_financing"
-
-
-# class AppLicationType(str, Enum):
-#     LOAN = "LOAN"
-#     BUSINESS_FINANCING = "BUSINESS_FINANCING"
-#     CAR_FINANCING = "CAR_FINANCING"
-#     HOME_FINANCING = "HOME_FINANCING"
+class TrackUpdateModel(BaseModel):
+    title: str
