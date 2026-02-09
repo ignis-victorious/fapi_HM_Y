@@ -3,7 +3,7 @@
 from fastapi import FastAPI
 
 #  Import FILES
-from .models.models import ApplicationType
+from .models.models import ApplicationType, SongModel
 
 #  ______________________
 #
@@ -86,8 +86,31 @@ def get_application(app_type: ApplicationType) -> dict[str, ApplicationType]:
 
 #  QUERY parameters
 @app.get(path="/songs")
-def get_songs(skip: int, limit: int, page: int, per_page: int) -> dict[str, int]:
+def get_songs(skip: int = 1, limit: int = 0, page: int = 1, per_page: int = 10) -> dict[str, int]:
+    # def get_songs(skip: int, limit: int, page: int, per_page: int) -> dict[str, int]:
     return {"skip": skip, "limit": limit, "page": page, "per_page": per_page}
+
+
+#  Multiple Query Parameters
+# @app.get(path="/playlist/{playlist_id}/songs/{song_id}")
+# def get_songs_by_playlist(playlist_id: int, song_id: int) -> dict[str, int]:
+#     return {"song_id": song_id, "playlist_id": playlist_id}
+@app.get(path="/playlist/{playlist_id}/songs/{song_id}")
+def get_songs_by_playlist(playlist_id: int, song_id: int, q: str | None = None) -> dict[str, int | str | None]:
+    # def get_songs_by_playlist(playlist_id: int, song_id: int, q: str = "") -> dict[str, int]:
+    return {"song_id": song_id, "playlist_id": playlist_id, "q": q}
+
+
+#  {"title": "I Love You","desc": "Lovers","releasedDate": "2026-02-09","album": "Love Me All the Way"}
+@app.post(path="/songs")
+def create_song(song: SongModel) -> SongModel:
+    return song
+
+
+# {"title": "I Don't Love You Any More", "desc": "Lovers", "releasedDate": "2026-02-09", "album": "Love Me All the Way"}
+@app.put(path="/songs/{song_id}")
+def change_song(song: SongModel, song_id: int) -> dict[str, int]:
+    return {"song_id": song_id, **song.model_dump()}
 
 
 #

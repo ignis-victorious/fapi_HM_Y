@@ -1,10 +1,20 @@
 #
 #  Import LIBRARIES
+from datetime import date
 from enum import Enum
+
+from pydantic import BaseModel
 
 #  Import FILES
 #  ______________________
 #
+
+
+class SongModel(BaseModel):
+    title: str
+    desc: str
+    releasedDate: date
+    album: str | None = None  # Optional property
 
 
 class ApplicationType(str, Enum):
