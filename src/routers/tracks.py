@@ -1,9 +1,9 @@
 #  Import LIBRARIES
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException, status
 
 #  Import FILES
 from ..data.tracks_db import tracks
-from ..models.models import TrackModel, TrackUpdateModel
+from ..models.schema import TrackModel, TrackUpdateModel
 
 #  ______________________
 #
@@ -31,7 +31,8 @@ async def get_tracks_by_id(track_id: int) -> TrackModel | dict[str, str]:
         if track.id == track_id:
             return track
 
-    return {"message": "Could not find track based on your id"}
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="This track does not exist.")
+    # return {"message": "Could not find track based on your id"}
 
 
 @tracks_router.delete(path="/tracks/{track_id}", response_model=str)
@@ -41,7 +42,9 @@ def delete_track_by_id(track_id: int) -> str:
         if track.id == track_id:
             tracks.pop(index)
             return "Track deleted"
-    return "Could not find track based on your id"
+
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="This track does not exist.")
+    # return "Could not find track based on your id"
 
 
 @tracks_router.put(path="/tracks/{track_id}", response_model=str)
@@ -51,7 +54,9 @@ def update_track_by_id(track_id: int, track_dto: TrackUpdateModel) -> str:  # Da
         if track.id == track_id:
             track.title = track_dto.title
             return "Track Updated"
-    return "Could not find track based on your id"
+
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="This track does not exist.")
+    # return "Could not find track based on your id"
 
 
 # @tracks_router.get(path="/tracks")

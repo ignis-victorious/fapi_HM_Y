@@ -1,7 +1,7 @@
 #
 #  Import LIBRARIES
 #  Import FILES
-from ..models.models import TrackModel
+from ..models.schema import TrackModel
 
 #  ______________________
 #
